@@ -42,12 +42,13 @@ const {Schema} =  mongoose;
               index : true, 
               unique :  true,
           },
-    }, { 
-       collection :{
-              collection : 'UniqueEmail',
-              timestamps : true,
-       }
-          })
+    } , {
+         collection : 'UniqeEmail',
+         timestamps : true
+    })
+       
+    
+
         
 
     const User = mongoose.model('User' , userSchema);

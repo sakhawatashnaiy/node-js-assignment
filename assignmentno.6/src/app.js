@@ -12,8 +12,8 @@ app.use(express.json());
   app.use('/addUser' , async (req,res)=>{
          
         try{
-              const body = req.body
-              const user = await new User(data)
+              const data = req.body
+              const user = await User(data)
               await user.save();
               res.send({
                   message : 'User added successfully!',
@@ -26,6 +26,23 @@ app.use(express.json());
              })
         }
   })
+      app.use('/editUser/:id' , async (req,res)=>{
+             const {id} = req.params
+             const data = req.body
+             try{
+                    const user = await User.findByIdAndUpdate(id,data , { new: true })
+                    res.send({
+                          message: 'user updated succsessfuly',
+                    })
+             }catch(error) {
+                     res.status(400).send({
+            message: 'Error updating user',
+            error: error.message
+        })
+             }
+      })
+
+
 
 connectDB().then(()=>{
       console.log('Database connected sucessfully!');
